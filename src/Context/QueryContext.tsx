@@ -13,31 +13,25 @@ export const QueryProvider = ({ children }: { children: ReactNode }) => {
     setReddits((prev) => [...prev, newReddit]);
   };
 
+  const removeReddit = (index: number) => {
+    setReddits(reddits.filter((_, i) => i !== index));
+  };
+
   const retrieve = async (query: string) => {
     try {
       const res = await fetch(`https://www.reddit.com/r/${query}.json`);
       const data = await res.json();
-      const results = data.data.children.map(
-        ({
-          data,
-        }: {
-          data: {
-            id: string;
-            title: string;
-            author: string;
-            score: number;
-            num_comments: number;
-            url: string;
-          };
-        }) => ({
-          id: data.id,
-          title: data.title,
-          author: data.author,
-          score: data.score,
-          num_comments: data.num_comments,
-          url: data.url,
-        })
-      );
+      console.log(data);
+
+      const results = data.data.children.map((child: { data: RedditType }) => ({
+        id: child.data.id,
+        subreddit: child.data.subreddit,
+        title: child.data.title,
+        author: child.data.author,
+        score: child.data.score,
+        num_comments: child.data.num_comments,
+        url: child.data.url,
+      }));
 
       addReddit(results);
     } catch (error) {
@@ -58,7 +52,9 @@ export const QueryProvider = ({ children }: { children: ReactNode }) => {
   }, [reddits]);
 
   return (
-    <QueryContext.Provider value={{ query, setQuery, reddits, retrieve }}>
+    <QueryContext.Provider
+      value={{ query, setQuery, reddits, retrieve, removeReddit }}
+    >
       {children}
     </QueryContext.Provider>
   );

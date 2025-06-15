@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router";
-import Home from "./Components/Home";
-import Reddits from "./Components/Reddits";
+import Home from "./Pages/Home";
+import Reddits from "./Pages/Reddits";
 
 function App() {
   return (

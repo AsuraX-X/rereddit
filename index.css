@@ -3,4 +3,27 @@
 html,
 body {
   background-color: #0e1113;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  background: #0e1113;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e1113;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fff #0e1113;
 }

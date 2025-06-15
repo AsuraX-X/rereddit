@@ -1,9 +1,11 @@
 import { motion } from "motion/react";
-import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 import { QueryProvider } from "../Context/QueryContext";
 import { useQueryContext } from "../Context/useQueryContext";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   const { query, setQuery, retrieve } = useQueryContext();
 
   const text = "Reddit";
@@ -44,13 +46,25 @@ const Home = () => {
               type="text"
               placeholder="e.g jokes"
               className="bg-white py-2 px-4 rounded-full text-base w-100"
+              value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  retrieve(query);
+                  setQuery("");
+                  navigate("/reddits");
+                }
+              }}
             />
             <button
-              onClick={() => retrieve(query)}
+              onClick={() => {
+                retrieve(query);
+                setQuery("");
+                navigate("/reddits");
+              }}
               className="bg-[#ff4500] text-white py-2 px-4 rounded-full cursor-pointer text-xl"
             >
-              <NavLink to="/reddits">Retrieve</NavLink>
+              Retrieve
             </button>
           </div>
         </section>

@@ -1,5 +1,6 @@
 export type RedditType = {
   id: string;
+  subreddit: string;
   title: string;
   author: string;
   score: number;
@@ -12,4 +13,5 @@ export interface QCI {
   setQuery: (newQuery: string) => void;
   reddits: RedditType[][];
   retrieve: (query: string) => void;
+  removeReddit: (index: number) => void;
 }
