@@ -11,7 +11,10 @@ export type RedditType = {
 export interface QCI {
   query: string;
   setQuery: (newQuery: string) => void;
+  error: string;
   reddits: RedditType[][];
   retrieve: (query: string) => void;
   removeReddit: (index: number) => void;
+  filtered: string[];
+  suggestions: string[];
 }
