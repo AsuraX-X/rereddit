@@ -2,6 +2,9 @@
 
 A modern, animated web app to search, save, and browse your favorite subreddits with instant suggestions and smooth navigation.
 
+> **This project was created for [roadmap.sh](https://roadmap.sh/)!**  
+> View it on the roadmap.sh projects page: [https://roadmap.sh/projects/reddit-client](https://roadmap.sh/projects/reddit-client)
+
 ## Live Demo
 
 Check out the deployed app here: [rereddit-az.vercel.app](https://rereddit-az.vercel.app)
@@ -56,7 +59,7 @@ npm run dev
 ```
 
 4. **Open in your browser:**
-   Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
+  Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
 
 ## Project Structure
 
@@ -66,19 +69,19 @@ src/
   main.tsx
   InterfacesAndTypes.tsx
   Components/
-   Error1.tsx
-   Error2.tsx
-   RedditCard.tsx
-   SubredditButton.tsx
-   SubredditCard.tsx
-   SuggestionsList.tsx
+  Error1.tsx
+  Error2.tsx
+  RedditCard.tsx
+  SubredditButton.tsx
+  SubredditCard.tsx
+  SuggestionsList.tsx
   Context/
-   QueryContext.tsx
-   QueryProvider.tsx
-   useQueryContext.tsx
+  QueryContext.tsx
+  QueryProvider.tsx
+  useQueryContext.tsx
   Pages/
-   Home.tsx
-   Reddits.tsx
+  Home.tsx
+  Reddits.tsx
 ```
 
 - **Components/**: Reusable UI components.
@@ -91,6 +94,5 @@ src/
 - [React Icons](https://react-icons.github.io/react-icons/) for UI icons.
 
 ---
-
 
 **Enjoy using ReReddit!**
