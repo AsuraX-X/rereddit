@@ -64,7 +64,7 @@ const Home = () => {
                 <input
                   type="text"
                   placeholder="e.g jokes"
-                  className="bg-white py-2 px-4 rounded-full text-base w-120"
+                  className="bg-white py-2 px-4 rounded-full text-base w-80 sm:w-120"
                   value={query}
                   onChange={handleChange}
                   onKeyDown={(e) => {

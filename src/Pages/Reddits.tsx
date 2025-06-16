@@ -79,7 +79,7 @@ const Reddits = () => {
             <BiPlus size={30} />
           </motion.button>
         </div>
-        <div className="flex justify-between w-full pl-4 z-0">
+        <div className="flex justify-between w-full sm:pl-4 pl-8 z-0">
           <div
             onClick={() => {
               if (index > 0) {
