@@ -2,6 +2,10 @@
 
 A modern, animated web app to search, save, and browse your favorite subreddits with instant suggestions and smooth navigation.
 
+## Live Demo
+
+Check out the deployed app here: [rereddit-az.vercel.app](https://rereddit-az.vercel.app)
+
 ## Screenshots
 
 ### Home Page
@@ -33,23 +37,26 @@ A modern, animated web app to search, save, and browse your favorite subreddits 
 ## Getting Started
 
 1. **Clone the repository:**
-  ```sh
-  git clone https://github.com/yourusername/rereddit.git
-  cd rereddit
-  ```
+
+```sh
+git clone https://github.com/yourusername/rereddit.git
+cd rereddit
+```
 
 2. **Install dependencies:**
-  ```sh
-  npm install
-  ```
+
+```sh
+npm install
+```
 
 3. **Run the development server:**
-  ```sh
-  npm run dev
-  ```
+
+```sh
+npm run dev
+```
 
 4. **Open in your browser:**
-  Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
+   Visit [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
 
 ## Project Structure
 
@@ -78,19 +85,12 @@ src/
 - **Context/**: Global state management using React Context API.
 - **Pages/**: Main pages/routes of the app.
 
-## Deployment
-
-You can deploy this app for free using:
-- [Vercel](https://vercel.com/)
-- [Netlify](https://netlify.com/)
-- [GitHub Pages](https://pages.github.com/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-
 ## Credits
 
 - Reddit API for subreddit data.
 - [React Icons](https://react-icons.github.io/react-icons/) for UI icons.
 
 ---
+
 
 **Enjoy using ReReddit!**
