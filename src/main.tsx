@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router";
-import { QueryProvider } from "./Context/QueryContext";
+import { QueryProvider } from "./Context/QueryProvider";
 import App from "./App";
 
 const root = document.getElementById("root");

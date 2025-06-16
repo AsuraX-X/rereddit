@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
-import { QueryProvider } from "../Context/QueryContext";
 import { useQueryContext } from "../Context/useQueryContext";
 import { type ChangeEvent } from "react";
+import SuggestionsList from "../Components/SuggestionsList";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const { query, setQuery, retrieve, filtered, suggestions } =
+  const { query, setQuery, retrieve, filtered, suggestions, reddits, exists } =
     useQueryContext();
 
   const text = "Reddit";
@@ -27,90 +27,90 @@ const Home = () => {
   };
 
   return (
-    <QueryProvider>
-      <div>
-        <section className="h-screen flex justify-center items-center">
-          <div className="flex justify-center items-center flex-col gap-4">
-            <div className="flex text-6xl text-[#ff4500]">
-              <p>Re</p>
-              <motion.p
-                variants={parent}
-                initial="hidden"
-                animate="visible"
-                className="text-white"
-              >
-                {text.split("").map((_, i) => (
-                  <motion.span variants={child} key={i}>
-                    {_}
-                  </motion.span>
-                ))}
-              </motion.p>
+    <div>
+      <section className="h-screen flex justify-center items-center">
+        <div className="flex justify-center items-center flex-col gap-4">
+          <div className="flex text-6xl text-[#ff4500]">
+            <p>Re</p>
+            <motion.p
+              variants={parent}
+              initial="hidden"
+              animate="visible"
+              className="text-white"
+            >
+              {text.split("").map((_, i) => (
+                <motion.span variants={child} key={i}>
+                  {_}
+                </motion.span>
+              ))}
+            </motion.p>
+          </div>
+          <p className="text-[#d2d2d2] text-2xl">
+            Retrieve your favourite subreddits
+          </p>
+          <div className="relative">
+            <div className="z-10 relative">
+              <input
+                type="text"
+                placeholder="e.g jokes"
+                className="bg-white py-2 px-4 rounded-full text-base w-120"
+                value={query}
+                onChange={handleChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    exists(query);
+                    retrieve(query);
+                    setQuery("");
+                    navigate("/reddits");
+                  }
+                }}
+              />
             </div>
-            <p className="text-[#d2d2d2] text-2xl">
-              Retrieve your favourite subreddits
-            </p>
-            <div className="relative">
-              <div className="z-10 relative">
-                <input
-                  type="text"
-                  placeholder="e.g jokes"
-                  className="bg-white py-2 px-4 rounded-full text-base w-100"
-                  value={query}
-                  onChange={handleChange}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      retrieve(query);
-                      setQuery("");
-                      navigate("/reddits");
-                    }
-                  }}
-                />
-              </div>
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: filtered.length > 0 ? "auto" : 0 }}
-                className="absolute overflow-hidden bg-[#181c1f] top-0 z-0 text-white px-4 w-full pt-8 rounded-b-2xl rounded-t-xl"
-              >
-                <ul className="py-4 divide-[#3e4142] divide-y-1">
-                  {filtered.length > 0
-                    ? filtered.map(
-                        (_, i) =>
-                          i < 5 &&
-                          _ !== query && (
-                            <li
-                              onClick={() => {
-                                retrieve(_);
-                                setQuery("");
-                                navigate("/reddits");
-                              }}
-                              className=" p-4 cursor-pointer"
-                              key={i}
-                            >
-                              {_}
-                            </li>
-                          )
-                      )
-                    : suggestions.length === 0 && (
-                        <p className="p-4">Loading</p>
-                      )}
-                </ul>
-              </motion.div>
-            </div>
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{
+                height:
+                  filtered.length > 0 || (suggestions.length === 0 && query)
+                    ? "auto"
+                    : 0,
+              }}
+              className="absolute overflow-hidden bg-[#181c1f] top-0 z-0 text-white px-4 w-full pt-8 rounded-b-2xl rounded-t-xl"
+            >
+              <SuggestionsList />
+            </motion.div>
+          </div>
+          <div className="flex gap-2 h-15 items-center">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{
+                scale: 1.05,
+                borderColor: "#ffffff",
+              }}
               onClick={() => {
+                exists(query);
                 retrieve(query);
                 setQuery("");
                 navigate("/reddits");
               }}
-              className="bg-[#ff4500] text-white py-2 px-4 rounded-full cursor-pointer text-xl"
+              className="bg-[#ff4500] border-3 border-[#ff4500] text-white py-2 w-35 rounded-full cursor-pointer text-xl"
             >
               Retrieve
             </motion.button>
+            {reddits.length > 0 && (
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  borderColor: "#ff4500",
+                }}
+                onClick={() => navigate("/reddits")}
+                className="bg-white border-3 border-[#ffffff] w-35 py-2 rounded-full text-xl cursor-pointer"
+              >
+                My ReReddits
+              </motion.button>
+            )}
           </div>
-        </section>
-      </div>
-    </QueryProvider>
+        </div>
+      </section>
+    </div>
   );
 };
 

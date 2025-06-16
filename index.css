@@ -7,7 +7,10 @@ body {
   padding: 0;
 }
 
-/* Custom scrollbar styles */
+* {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   background: #0e1113;
@@ -22,7 +25,6 @@ body {
   background: #0e1113;
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: #fff #0e1113;
