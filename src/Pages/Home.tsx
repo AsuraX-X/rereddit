@@ -76,7 +76,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <SuggestionsList />
+              <SuggestionsList home={true} />
             </div>
             <div className="flex gap-2 h-15 items-center">
               <motion.button

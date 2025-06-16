@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 import { useQueryContext } from "../Context/useQueryContext";
+import { useNavigate } from "react-router";
 
-const SuggestionsList = () => {
+const SuggestionsList = ({ home = false }: { home?: boolean }) => {
   const {
     setLoading,
     retrieve,
@@ -11,6 +12,8 @@ const SuggestionsList = () => {
     suggestions,
     query,
   } = useQueryContext();
+
+  const nav = useNavigate();
 
   return (
     <motion.div
@@ -32,6 +35,7 @@ const SuggestionsList = () => {
                   <li
                     key={i}
                     onClick={() => {
+                      if (home) nav("/reddits");
                       exists(_);
                       setLoading("loading1");
                       retrieve(_);
