@@ -28,7 +28,7 @@ const Reddits = () => {
         className="w-full flex flex-col sm:flex-row gap-4 sm:gap-0 sm:divide-x-1 sm:divide-[#3e4142]
        sm:pl-8 pr-8 mb-5 items-center"
       >
-        <div className="flex gap-2 justify-center items-center sm:w-auto sm:pr-12 w-full ml-8 sm:m-0 ">
+        <div className="flex gap-4 justify-center items-center sm:w-auto sm:pr-12 w-full ml-8 sm:m-0 ">
           <div className="relative">
             <input
               type="text"
@@ -48,7 +48,10 @@ const Reddits = () => {
             <SuggestionsList />
           </div>
           <motion.button
-            whileHover={{ borderColor: "#ffffff" }}
+            whileHover={{
+              borderColor: "#ffffff",
+              borderRightColor: "#ffffff",
+            }}
             animate={
               loading === "loading1"
                 ? {

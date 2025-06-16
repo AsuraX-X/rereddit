@@ -7,16 +7,7 @@ import SuggestionsList from "../Components/SuggestionsList";
 const Home = () => {
   const navigate = useNavigate();
 
-  const {
-    query,
-    setQuery,
-    retrieve,
-    filtered,
-    suggestions,
-    reddits,
-    exists,
-    setLoading,
-  } = useQueryContext();
+  const { query, setQuery, retrieve, reddits, exists } = useQueryContext();
 
   const text = "Reddit";
 
@@ -78,7 +69,6 @@ const Home = () => {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       exists(query);
-                      if (query) setLoading("loading1");
                       retrieve(query);
                       setQuery("");
                       navigate("/reddits");
@@ -86,18 +76,7 @@ const Home = () => {
                   }}
                 />
               </div>
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{
-                  height:
-                    filtered.length > 0 || (suggestions.length === 0 && query)
-                      ? "auto"
-                      : 0,
-                }}
-                className="absolute overflow-hidden bg-[#181c1f] top-0 z-0 text-white px-4 w-full pt-8 rounded-b-2xl rounded-t-xl"
-              >
-                <SuggestionsList />
-              </motion.div>
+              <SuggestionsList />
             </div>
             <div className="flex gap-2 h-15 items-center">
               <motion.button
@@ -107,7 +86,6 @@ const Home = () => {
                 }}
                 onClick={() => {
                   exists(query);
-                  if (query) setLoading("loading1");
                   retrieve(query);
                   setQuery("");
                   navigate("/reddits");
