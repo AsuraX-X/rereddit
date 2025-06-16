@@ -79,42 +79,44 @@ const Reddits = () => {
             <BiPlus size={30} />
           </motion.button>
         </div>
-        <div className="flex justify-between w-full sm:pl-4 pl-8 z-0">
-          <div
-            onClick={() => {
-              if (index > 0) {
-                setX(x + 146);
-                setIndex(index - 1);
-              }
-            }}
-            className="flex justify-center cursor-pointer items-center"
-          >
-            <BiChevronLeft color="#ffffff" size={40} />
-          </div>
-          <div className="flex overflow-hidden w-full relative h-12 max-w-255">
-            <motion.div
-              animate={{ x: `${x}px` }}
-              className="flex gap-1.5 absolute items-center justify-center top-0 bottom-0"
-            >
-              {reddits.map((R, i) => (
-                <SubredditButton key={i} i={i} subreddit={R[0].subreddit} />
-              ))}
-            </motion.div>
-          </div>
-          <div className="flex justify-center cursor-pointer items-center">
-            <BiChevronRight
+        {reddits.length > 0 && (
+          <div className="flex justify-between w-full sm:pl-4 pl-8 z-0">
+            <div
               onClick={() => {
-                if (index < reddits.length - 1) {
-                  setX(x - 146);
-                  setIndex(index + 1);
+                if (index > 0) {
+                  setX(x + 146);
+                  setIndex(index - 1);
                 }
               }}
               className="flex justify-center cursor-pointer items-center"
-              color="#ffffff"
-              size={40}
-            />
+            >
+              <BiChevronLeft color="#ffffff" size={40} />
+            </div>
+            <div className="flex overflow-hidden w-full relative h-12 max-w-255">
+              <motion.div
+                animate={{ x: `${x}px` }}
+                className="flex gap-1.5 absolute items-center justify-center top-0 bottom-0"
+              >
+                {reddits.map((R, i) => (
+                  <SubredditButton key={i} i={i} subreddit={R[0].subreddit} />
+                ))}
+              </motion.div>
+            </div>
+            <div className="flex justify-center cursor-pointer items-center">
+              <BiChevronRight
+                onClick={() => {
+                  if (index < reddits.length - 1) {
+                    setX(x - 146);
+                    setIndex(index + 1);
+                  }
+                }}
+                className="flex justify-center cursor-pointer items-center"
+                color="#ffffff"
+                size={40}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </section>
       <section className="text-white h-[80%] overflow-x-auto">
         <div className="h-9/10 flex">

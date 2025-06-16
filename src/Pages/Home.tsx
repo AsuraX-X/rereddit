@@ -7,7 +7,7 @@ import SuggestionsList from "../Components/SuggestionsList";
 const Home = () => {
   const navigate = useNavigate();
 
-  const { query, setQuery, retrieve, filtered, suggestions, reddits, exists } =
+  const { query, setQuery, retrieve, filtered, suggestions, reddits, exists,setLoading } =
     useQueryContext();
 
   const text = "Reddit";
@@ -98,6 +98,7 @@ const Home = () => {
                 }}
                 onClick={() => {
                   exists(query);
+                                if (query) setLoading("loading1");
                   retrieve(query);
                   setQuery("");
                   navigate("/reddits");
