@@ -75,8 +75,8 @@ export const QueryProvider = ({ children }: { children: ReactNode }) => {
       );
     } else {
       setReddits((prev) => [...prev, newReddit]);
+      setAdded(true);
     }
-    setAdded(true);
   };
 
   const retrieve = async (query: string) => {

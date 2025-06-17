@@ -5,15 +5,26 @@ import { motion } from "motion/react";
 import SubredditButton from "../Components/SubredditButton";
 import SubredditCard from "../Components/SubredditCard";
 import SuggestionsList from "../Components/SuggestionsList";
-import { useState } from "react";
+import { useRef } from "react";
 
 const Reddits = () => {
   const { query, setQuery, retrieve, exists, loading, setLoading, reddits } =
     useQueryContext();
 
-  const [x, setX] = useState(0);
+  const test = useRef<HTMLDivElement>(null);
 
-  const [index, setIndex] = useState(0);
+  const scrollByOne = (direction: string) => {
+    const container = test.current;
+    if (!container) return;
+    const item: HTMLButtonElement | null =
+      container.querySelector(".subreddit-button");
+    if (!item) return;
+    const scrollAmount = item.offsetWidth;
+    container.scrollBy({
+      left: direction === "right" ? scrollAmount : -scrollAmount,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="h-screen flex flex-col justify-between overflow-y-hidden">
@@ -25,7 +36,7 @@ const Reddits = () => {
         </h1>
       </header>
       <section
-        className="w-full flex flex-col sm:flex-row gap-4 sm:gap-0 sm:divide-x-1 sm:divide-[#3e4142]
+        className="flex flex-col sm:flex-row gap-4 sm:gap-0 sm:divide-x-1 sm:divide-[#3e4142]
        sm:pl-8 pr-8 mb-5 items-center"
       >
         <div className="flex gap-4 justify-center items-center sm:w-auto sm:pr-12 w-full ml-8 sm:m-0 ">
@@ -83,40 +94,26 @@ const Reddits = () => {
           </motion.button>
         </div>
         {reddits.length > 0 && (
-          <div className="flex justify-between w-full sm:pl-4 pl-8 z-0">
+          <div className="flex w-full overflow-auto justify-between sm:pl-4 pl-8 z-0">
             <div
-              onClick={() => {
-                if (index > 0) {
-                  setX(x + 146);
-                  setIndex(index - 1);
-                }
-              }}
+              onClick={() => scrollByOne("left")}
               className="flex justify-center cursor-pointer items-center"
             >
               <BiChevronLeft color="#ffffff" size={40} />
             </div>
-            <div className="flex overflow-hidden w-full relative h-12 max-w-255">
-              <motion.div
-                animate={{ x: `${x}px` }}
-                className="flex gap-1.5 absolute items-center justify-center top-0 bottom-0"
-              >
-                {reddits.map((R, i) => (
-                  <SubredditButton key={i} i={i} subreddit={R[0].subreddit} />
-                ))}
-              </motion.div>
+            <div
+              ref={test}
+              className="flex overflow-auto h-12 scrollbar-none max-w-255 w-full"
+            >
+              {reddits.map((R, i) => (
+                <SubredditButton key={i} i={i} subreddit={R[0].subreddit} />
+              ))}
             </div>
-            <div className="flex justify-center cursor-pointer items-center">
-              <BiChevronRight
-                onClick={() => {
-                  if (index < reddits.length - 1) {
-                    setX(x - 146);
-                    setIndex(index + 1);
-                  }
-                }}
-                className="flex justify-center cursor-pointer items-center"
-                color="#ffffff"
-                size={40}
-              />
+            <div
+              onClick={() => scrollByOne("right")}
+              className="flex justify-center cursor-pointer items-center"
+            >
+              <BiChevronRight color="#ffffff" size={40} />
             </div>
           </div>
         )}

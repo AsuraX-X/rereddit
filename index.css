@@ -29,3 +29,10 @@ body {
   scrollbar-width: thin;
   scrollbar-color: #fff #0e1113;
 }
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  width: none;
+}

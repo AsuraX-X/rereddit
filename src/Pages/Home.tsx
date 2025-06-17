@@ -7,7 +7,8 @@ import SuggestionsList from "../Components/SuggestionsList";
 const Home = () => {
   const navigate = useNavigate();
 
-  const { query, setQuery, retrieve, reddits, exists } = useQueryContext();
+  const { query, setQuery, retrieve, reddits, exists, setLoading } =
+    useQueryContext();
 
   const text = "Reddit";
 
@@ -69,6 +70,7 @@ const Home = () => {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       exists(query);
+                      setLoading("loading1");
                       retrieve(query);
                       setQuery("");
                       navigate("/reddits");
@@ -86,6 +88,7 @@ const Home = () => {
                 }}
                 onClick={() => {
                   exists(query);
+                  setLoading("loading1");
                   retrieve(query);
                   setQuery("");
                   navigate("/reddits");
